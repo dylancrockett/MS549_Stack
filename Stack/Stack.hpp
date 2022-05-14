@@ -56,6 +56,11 @@ namespace stack {
 				this->container = nullptr;
 			}
 
+			~Stack() {
+				//delete the container if it exists (no mem leak)
+				if (this->container != nullptr) delete this->container;
+			}
+
 			//push a value onto the stack
 			void Push(T item) throw() {
 				//for the condition that the stack is full
@@ -96,9 +101,6 @@ namespace stack {
 
 				//store the current top value before removing it
 				T item = this->container[this->current];
-
-				//remove the current top value
-				//delete this->container[this->current];
 
 				//if there is only 1 item left in the stack
 				if (this->current == 0) {
