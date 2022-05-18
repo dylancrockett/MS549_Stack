@@ -12,60 +12,60 @@ namespace stack_test {
 	using namespace testing;
 
 	//test the Stack class to ensure it functions as expected
-	inline void Test() {
+	inline void test() {
 		//create a new unit test
-		UnitTest stackTest = UnitTest("Stack Datastructure Test");
+		UnitTest test = UnitTest("Stack Datastructure Test");
 
 		//set a size for the stack & create it
 		int stackSize = 5;
 		Stack<int> stack = Stack<int>(stackSize);
 
-		stackTest.ASSERT("A StackEmpty exception is raised when calling Pop on an empty stack.", [&stack]() {
+		test.assert<bool>("A StackEmpty exception is raised when calling Pop on an empty stack.", [&stack]() {
 			try {
-				stack.Pop();
+				stack.pop();
 			}
 			catch (StackEmpty& e) {
 				return true;
 			}
 
 			return false;
-		});
+		}, true);
 
-		stackTest.ASSERT("A StackEmpty exception is raised when calling Peak on an empty stack.", [&stack]() {
+		test.assert<bool>("A StackEmpty exception is raised when calling Peak on an empty stack.", [&stack]() {
 			try {
-				stack.Peak();
+				stack.peak();
 			}
 			catch (StackEmpty& e) {
 				return true;
 			}
 
 			return false;
-		});
+		}, true);
 
 		//check that the stack can be filled with n items
-		stackTest.ASSERT(("The stack set to a size " + std::to_string(stackSize) + " of can be filled with " + std::to_string(stackSize) + " items."), [&stack, &stackSize]() {
+		test.assert<bool>(("The stack set to a size " + std::to_string(stackSize) + " of can be filled with " + std::to_string(stackSize) + " items."), [&stack, &stackSize]() {
 			for (int i = 0; i < stackSize; i++) {
-				stack.Push(i + 1);
+				stack.push(i + 1);
 			}
 
 			return true;
-		});
+		}, true);
 
-		stackTest.ASSERT(("A StackFull exception is raised when calling Push on a full stack."), [&stack, &stackSize]() {
+		test.assert<bool>(("A StackFull exception is raised when calling Push on a full stack."), [&stack, &stackSize]() {
 			try {
-				stack.Push(42);
+				stack.push(42);
 			}
 			catch (StackFull& e) {
 				return true;
 			}
 
 			return false;
-		});
+		}, true);
 
-		stackTest.ASSERT(("A StackEmpty exception will be raised after all items have been removed from the list."), [&stack, &stackSize]() {
+		test.assert<bool>(("A StackEmpty exception will be raised after all items have been removed from the list."), [&stack, &stackSize]() {
 			try {
 				for (int i = 0; i < 1000000000; i++) {
-					stack.Pop();
+					stack.pop();
 				}
 			}
 			catch (StackEmpty& e) {
@@ -73,15 +73,15 @@ namespace stack_test {
 			}
 
 			return false;
-		});
+		}, true);
 
-		stackTest.ASSERT(("An item can be added to an emptied stack."), [&stack, &stackSize]() {
-			stack.Push(42);
+		test.assert<bool>(("An item can be added to an emptied stack."), [&stack, &stackSize]() {
+			stack.push(42);
 			return true;
-		});
+		}, true);
 
 		//log the results of the UnitTest
-		stackTest.LOG_RESULTS();
+		test.log_results();
 	}
 }
 

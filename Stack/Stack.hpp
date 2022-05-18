@@ -62,7 +62,7 @@ namespace stack {
 			}
 
 			//push a value onto the stack
-			void Push(T item) throw() {
+			void push(T item) throw() {
 				//for the condition that the stack is full
 				if (current + 1 >= this->size) {
 					throw StackFull();
@@ -82,7 +82,7 @@ namespace stack {
 			}
 
 			//peak at the current top value in the stack
-			T Peak() throw() {
+			T peak() throw() {
 				//for the condition that the stack is empty
 				if (this->container == nullptr) {
 					throw StackEmpty("Can't call Peak on an empty stack.");
@@ -93,7 +93,7 @@ namespace stack {
 			}
 
 			//pop remove the value from the top of the stack and remove it from the stack
-			T Pop() throw() {
+			T pop() throw() {
 				//for the condition that the stack is empty
 				if (this->container == nullptr) {
 					throw StackEmpty("Can't call Pop on an empty stack.");

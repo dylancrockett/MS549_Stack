@@ -4,5 +4,5 @@
 int main()
 {
     //launch the unit testing for the stack datastructure class
-    stack_test::Test();
+    stack_test::test();
 }
